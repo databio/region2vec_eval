@@ -60,7 +60,7 @@ def bedtools_merge(base, df, merge_dist):
 
 
 def save_segmentation(name, segmentation, numfiles, overlap, folder='../segmentations/'):
-    fp = "{}_{}overlap_{}files_tfbs_universe.txt".format(name, overlap, numfiles)
+    fp = "{}_{}overlap_{}files_tfbs_universe.bed".format(name, overlap, numfiles)
     path = os.path.join(folder, fp)
     print("saving segmentation to ", path)
     segmentation.to_csv(path, sep='\t', index=False, header=False)
@@ -117,6 +117,7 @@ def segmentation_tile(tile_size, chrom_sizes, assembly, save_folder):
     creates a segmentation from tiling the genome and saves it to the folder
     returns: None
     '''
+    os.makedirs(save_folder, exist_ok=True)
     save_path = os.path.join(save_folder, f"tiles{tile_size}.{assembly}.bed")
     count = 0
     with open(save_path, "w") as fout:
@@ -159,7 +160,7 @@ if __name__ == "__main__":
     
     elif args.m == "tile":
         if args.v == "hg19":
-            chrom_sizes = "./hg19_chrom.sizes"
+            chrom_sizes = "data/hg19_chrom.sizes"
             segmentation_tile(args.t, chrom_sizes, "hg19", UNIVERSES_FOLDER)
         else:
             raise ValueError(f"not implemented for args.v={args.v}")

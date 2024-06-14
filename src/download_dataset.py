@@ -1,23 +1,14 @@
 import requests
 from bs4 import BeautifulSoup 
 import pandas as pd
-import numpy as np
 import urllib
 import re
-import gensim, logging
 from tqdm import tqdm
 import hashlib
 import os
-import gzip, bz2
+import gzip
 import shutil
-import pickle
-import time
-import matplotlib.pyplot as plt
-import logging
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
 from config import DATA_FOLDER, DATA_URL
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
 class TBFS_Downloader:

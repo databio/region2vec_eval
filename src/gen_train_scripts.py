@@ -33,10 +33,9 @@ for i,name in enumerate(train_file_names):
     file_ptrs[universes[i]] = open(name, 'w')
 params = combine_all([universes, init_lrs, embed_dims, win_sizes])
 save_folder = MODELS_FOLDER
-program_path = glob.glob("train_region2vec.py")[0]
 for param in params:
     universe, init_lr, embed_dim, win_size = param
-    script = f'python {program_path} --embed_dim {embed_dim} --init_lr {init_lr} --win_size {win_size} --universe {universe} --num_shufflings 100 --save_folder {save_folder}'
+    script = f'python -m src.train_region2vec --embed_dim {embed_dim} --init_lr {init_lr} --win_size {win_size} --universe {universe} --num_shufflings 100 --save_folder {save_folder}'
     file_ptrs[universe].write(script)
     file_ptrs[universe].write('\n')
 for u in file_ptrs:
